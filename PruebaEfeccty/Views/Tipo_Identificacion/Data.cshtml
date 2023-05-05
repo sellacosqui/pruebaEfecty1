@@ -1,0 +1,25 @@
+﻿@model List<PruebaEfeccty.Models.Tipo_Identificacion>
+@{
+    Layout = "";   
+}
+@foreach (var item in Model)
+{
+    <tr>
+        <td class="text-sm font-weight-normal">
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descripcion)
+        </td>
+        <td class="text-sm font-weight-normal">
+
+            <button type="button" class="btn btn-sm btn-info" onclick="loadEdit(@item.Id)">
+
+                Editar
+            </button>
+            <button type="button" class="btn btn-sm btn-danger" onclick="deleteItem(@item.Id)">
+                Eliminar
+            </button>
+        </td>
+    </tr>
+}

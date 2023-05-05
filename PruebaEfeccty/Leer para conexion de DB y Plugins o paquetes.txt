@@ -1,0 +1,5 @@
+Solo tiene 3 plugins los cuales son :
+Microsoft.EntityFrameworkCore
+Microsoft.EntityFrameworkCore.SqlS
+Microsoft.EntityFrameworkCore.Tools
+La Conexion de la base de datos esta por medio de el app sentings del proyecto

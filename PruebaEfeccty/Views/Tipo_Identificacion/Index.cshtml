@@ -1,0 +1,100 @@
+﻿@model List<PruebaEfeccty.Models.Tipo_Identificacion>
+@{
+
+    ViewData["Title"] = "Tipo de Identificacion";
+}
+
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <!-- Card header -->
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 class="mb-0">Conceptos Nómina</h5>
+                    </div>
+                    <div class="col-md-6">
+                        <a class="btn btn-sm btn-info float-end" data-bs-toggle="modal" data-bs-target="#formModal" onclick="newItem()">
+                            Nuevo documento
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-flush table-responsive-sm table-hover dataTable-table" id="datatable-view">
+                        <thead class="thead-light">
+                            <tr>
+                                <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-7">id</th>
+                                <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-7">descripcion</th>
+                                <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-7" width="200">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="Data">
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="text-sm font-weight-normal">
+                                        @Html.DisplayFor(modelItem => item.Id)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Descripcion)
+                                    </td>
+                                    <td class="text-sm font-weight-normal">
+
+                                        <button type="button" class="btn btn-sm btn-info" onclick="loadEdit(@item.Id)">
+
+                                            Editar
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-danger" onclick="deleteItem(@item.Id)">
+                                            Eliminar
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form id="formData">
+                <input type="hidden" value="" id="Tipo_Identificacionid" name="Id" />
+                <div class="modal-header">
+                    <h5 class="modal-title font-weight-normal" id="formModalLabel">Nuevo Registro Persona</h5>
+                    <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-group input-group-outline my-3">
+                                <label class="form-label" asp-for="@Model.FirstOrDefault().Descripcion">Descripción</label>
+                                <input type="text" class="form-control" asp-for="@Model.FirstOrDefault().Descripcion">
+                                <span asp-validation-for="@Model.FirstOrDefault().Descripcion" class="text-danger"></span>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" onclick="Guardar()">
+                        Guardar
+                    </button>
+                    <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">
+
+                        Cerrar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="~/js/Tipo_Identificacion.js" asp-append-version="true"></script>

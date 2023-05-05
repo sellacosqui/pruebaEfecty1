@@ -1,0 +1,37 @@
+﻿@model List<PruebaEfeccty.Models.Formulario>
+@{
+    Layout = "";   
+}
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="text-sm font-weight-normal">
+                                        @Html.DisplayFor(modelItem => item.Nombre)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Apellido)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Fecha_Nacimiento)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Estado_Civil)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Sueldo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Tipo_Identificacionmodel.Descripcion)
+                                    </td>
+                                    <td class="text-sm font-weight-normal">
+
+                                        <button type="button" class="btn btn-sm btn-info" onclick="loadEdit(@item.Id)">
+
+                                            Editar
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-danger" onclick="deleteItem(@item.Id)">
+                                            Eliminar
+                                        </button>
+                                    </td>
+                                </tr>
+                            }

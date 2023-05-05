@@ -1,0 +1,149 @@
+﻿@model List<PruebaEfeccty.Models.Formulario>
+@{
+
+    ViewData["Title"] = "Formulario";
+}
+
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <!-- Card header -->
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 class="mb-0">Formulario</h5>
+                    </div>
+                    <div class="col-md-6">
+
+                        <a class="btn btn-sm btn-info float-end" data-bs-toggle="modal" data-bs-target="#formModal" onclick="newItem()">
+                            
+                            Nueva persona
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-flush table-responsive-sm table-hover dataTable-table" id="datatable-view">
+                        <thead class="thead-light">
+                            <tr>
+                                <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-7">Nombre</th>
+                                <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-7">Apellido</th>
+                                <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-7">Fecha de Nacimiento</th>
+                                <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-7">Estado_Civil</th>
+                                <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-7">Sueldo</th>
+                                <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-7">Tipo_Identificacion</th>
+                                <th class="text-uppercase text-dark text-xxs font-weight-bolder opacity-7" width="200">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="Data">
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="text-sm font-weight-normal">
+                                        @Html.DisplayFor(modelItem => item.Nombre)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Apellido)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Fecha_Nacimiento)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Estado_Civil)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Sueldo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Tipo_Identificacionmodel.Descripcion)
+                                    </td>
+                                    <td class="text-sm font-weight-normal">
+
+                                        <button type="button" class="btn btn-sm btn-info" onclick="loadEdit(@item.Id)">
+
+                                            Editar
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-danger" onclick="deleteItem(@item.Id)">
+                                            Eliminar
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form  id="formData" >
+                <input type="hidden" value="" id="Formularioid" name="Id" />
+                <div class="modal-header">
+                    <h5 class="modal-title font-weight-normal" id="formModalLabel">Nuevo Registro Persona</h5>
+                    <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-group input-group-outline my-3">
+                                <label class="form-label" asp-for="@Model.FirstOrDefault().Nombre">Nombre</label>
+                                <input type="text" class="form-control" asp-for="@Model.FirstOrDefault().Nombre">
+                                <span asp-validation-for="@Model.FirstOrDefault().Nombre" class="text-danger"></span>
+                            </div>
+                            <div class="input-group input-group-outline my-3">
+                                <label class="form-label" asp-for="@Model.FirstOrDefault().Apellido">Apellido</label>
+                                <input type="text" class="form-control" asp-for="@Model.FirstOrDefault().Apellido">
+                                <span asp-validation-for="@Model.FirstOrDefault().Apellido" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group input-group-outline my-3">
+                                <label class="form-label" asp-for="@Model.FirstOrDefault().Fecha_Nacimiento">Fecha_Nacimiento</label>
+                                <input type="date" class="form-control" asp-for="@Model.FirstOrDefault().Fecha_Nacimiento">
+                                <span asp-validation-for="@Model.FirstOrDefault().Fecha_Nacimiento" class="text-danger"></span>
+                            </div>
+                            <div class="input-group input-group-outline my-3">
+                                <div class="form-check form-switch">
+                                    <label class="form-check-label text-danger" asp-for="@Model.FirstOrDefault().Estado_Civil">Estado Civil</label><br />
+                                    <input class="form-check-input" type="checkbox" asp-for="@Model.FirstOrDefault().Estado_Civil">
+                                    <span asp-validation-for="@Model.FirstOrDefault().Estado_Civil" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group input-group-outline my-3">
+                                <label class="form-label" asp-for="@Model.FirstOrDefault().Sueldo">Sueldo</label>
+                                <input type="number" class="form-control" asp-for="@Model.FirstOrDefault().Sueldo">
+                                <span asp-validation-for="@Model.FirstOrDefault().Sueldo" class="text-danger"></span>
+                            </div>
+                            <div class="input-group input-group-outline my-3>
+                                <label class="label_docente me-5">Tipo Identificación</label>
+                                <select type="text" class="selected_element form-control border ps-2" asp-for="@Model.FirstOrDefault().Estado_Civil" id="Tipo_Identificacion">
+                                    <option class="selected_element" value="">Seleccione Tipo Documento</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" onclick="Guardar()">
+                        Guardar
+                    </button>
+                    <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">
+
+                        Cerrar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="~/js/Formulario.js" asp-append-version="true"></script>
