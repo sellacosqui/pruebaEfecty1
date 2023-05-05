@@ -1,0 +1,25 @@
+create database MiguelPrueba
+go 
+use  MiguelPrueba
+go
+create table Formulario(
+id int not null primary key identity(1,1),
+Nombre varchar(100) not null
+,Apellido varchar(100) not null,
+Tipo_Identificacion int not null,
+Fecha_Nacimiento datetime not null,
+Sueldo int not null,
+Estado_Civil bit not null
+)
+go
+create table Tipo_Identificacion (
+id int not null primary key identity(1,1),
+Descripcion varchar(100) not null)
+go
+alter table Formulario add FOREIGN KEY (Tipo_Identificacion) REFERENCES Tipo_Identificacion(id)
+go
+INSERT INTO [dbo].[Tipo_Identificacion]
+           ([Descripcion])
+     VALUES
+           ('cc')
+GO
